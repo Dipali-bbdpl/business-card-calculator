@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
-    <!-- Tailwind CSS -->
+   
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
-        /* New Design Styles */
+      
         .option-card {
             transition: all 0.2s ease;
             cursor: pointer;
@@ -46,7 +46,6 @@
             font-weight: bold;
         }
         
-        /* Quantity selection styles */
         .quantity-row {
             transition: all 0.2s ease;
             cursor: pointer;
@@ -80,7 +79,6 @@
             padding: 8px 12px;
         }
         
-        /* Summary table styles */
         .summary-table {
             width: 100%;
             border-collapse: separate;
@@ -128,7 +126,6 @@
             text-decoration: line-through;
         }
         
-        /* Section spacing */
         .section-title {
             font-size: 16px;
             font-weight: 600;
@@ -145,14 +142,13 @@
 </head>
 <body class="bg-gray-50">
     <div class="container mx-auto px-4 py-6 max-w-5xl">
-        <!-- Header -->
+
         <div class="mb-8 text-center">
             <h1 class="text-3xl font-bold mb-2">Business Cards</h1>
             <p class="text-gray-600">Professional business cards with customization options</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Left Column: Customization Options -->
             <div class="lg:col-span-2">
                 <div class="bg-white rounded-xl shadow-sm border p-6 mb-6">
                     <h2 class="text-xl font-bold mb-6 flex items-center">
@@ -160,7 +156,6 @@
                     </h2>
                     
                     <div class="space-y-8">
-                        <!-- Size Options -->
                         <div>
                             <div class="section-title">
                                 <i class="fas fa-expand-alt"></i>
@@ -194,7 +189,6 @@
                             </div>
                         </div>
 
-                        <!-- Finish Options -->
                         <div>
                             <div class="section-title">
                                 <i class="fas fa-sparkles"></i>
@@ -228,7 +222,6 @@
                             </div>
                         </div>
 
-                        <!-- Corner Options -->
                         <div>
                             <div class="section-title">
                                 <i class="fas fa-cut"></i>
@@ -264,7 +257,6 @@
                     </div>
                 </div>
 
-                <!-- Quantity Selection -->
                 <div class="bg-white rounded-xl shadow-sm border p-6">
                     <h2 class="text-xl font-bold mb-6 flex items-center">
                         <i class="fas fa-calculator mr-3 text-gray-500"></i> Choose Your Quantity
@@ -320,7 +312,6 @@
                         </table>
                     </div>
                     
-                    <!-- Quick Info -->
                     <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
                         <div class="flex items-start">
                             <i class="fas fa-gift text-blue-500 mt-1 mr-3"></i>
@@ -333,59 +324,45 @@
                 </div>
             </div>
 
-            <!-- Right Column: Order Summary (UPDATED FORMAT) -->
             <div class="lg:col-span-1">
                 <div class="bg-white rounded-xl shadow-lg border p-6 sticky top-6">
                     <h2 class="text-xl font-bold mb-6 pb-3 border-b text-center">
                         Summary
                     </h2>
                     
-                    <!-- Summary Table - UPDATED FORMAT -->
+    
                     <table class="summary-table">
                         <tbody>
-                            <!-- Size -->
                             <tr>
                                 <td class="summary-label">Size</td>
                                 <td id="summary-size" class="summary-value">
                                     {{ $initialPricing['selected_options']['size']->name ?? 'Standard' }}
                                 </td>
                             </tr>
-                            
-                            <!-- Paper -->
                             <tr>
                                 <td class="summary-label">Paper</td>
                                 <td class="summary-value">Original</td>
                             </tr>
-                            
-                            <!-- Coating -->
                             <tr>
                                 <td class="summary-label">Coating</td>
                                 <td class="summary-value">Coated on both sides</td>
                             </tr>
-                            
-                            <!-- Finish -->
                             <tr>
                                 <td class="summary-label">Finish</td>
                                 <td id="summary-finish" class="summary-value">
                                     {{ $initialPricing['selected_options']['finish']->name ?? 'Matte' }}
                                 </td>
                             </tr>
-                            
-                            <!-- Corners -->
                             <tr>
                                 <td class="summary-label">Corners</td>
                                 <td id="summary-corners" class="summary-value">
                                     {{ $initialPricing['selected_options']['corners']->name ?? 'Square' }}
                                 </td>
                             </tr>
-                            
-                            <!-- Quantity -->
                             <tr>
                                 <td class="summary-label">Quantity</td>
                                 <td id="summary-quantity" class="summary-value font-bold">{{ $defaultQuantity }}</td>
                             </tr>
-                            
-                            <!-- Price -->
                             <tr>
                                 <td class="summary-label">Price</td>
                                 <td class="summary-value">
@@ -402,21 +379,15 @@
                             </tr>
                         </tbody>
                     </table>
-                    
-                    <!-- Savings (if any) -->
                     @if(($firstItem['savings'] ?? 0) > 0)
                         <div id="summary-savings" class="text-green-600 text-sm text-right mb-4">
                             Save ${{ number_format($firstItem['savings'], 2) }} ({{ $firstItem['savings_percentage'] ?? 0 }}%)
                         </div>
                     @endif
-
-                    <!-- Options Adjustment -->
                     <div class="mb-5 p-3 bg-gray-50 rounded-lg">
                         <div class="text-xs text-gray-500 mb-1">Options Adjustment</div>
                         <div id="adjustment-per-card" class="text-sm font-medium">+$0.00 per card</div>
                     </div>
-
-                    <!-- Action Buttons -->
                     <div class="space-y-3">
                        
                         
@@ -424,8 +395,6 @@
                             <i class="fas fa-download mr-2"></i> Save Quote
                         </button>
                     </div>
-                    
-                    <!-- Guarantees -->
                    
             </div>
         </div>
@@ -444,11 +413,7 @@
             let selectedQuantity = {{ $defaultQuantity }};
 
             console.log('Initial options:', selectedOptions);
-
-            // Initialize the UI
             updateInitialSummary();
-
-            // Option card click handler
             $(document).on('click', '.option-card', function() {
                 const $card = $(this);
                 const type = $card.data('type');
@@ -456,29 +421,15 @@
                 const optionName = $card.find('.font-medium.text-gray-900').text().trim();
                 
                 console.log(`Selected ${type}:`, optionId, optionName);
-                
-                // Update selected options
                 selectedOptions[type] = optionId;
-                
-                // Update UI for this option type
                 $(`.option-card[data-type="${type}"]`).removeClass('selected');
                 $card.addClass('selected');
-                
-                // Make sure radio button is checked
                 $card.find('input[type="radio"]').prop('checked', true);
-                
-                // Update summary display immediately
                 $(`#summary-${type}`).text(optionName);
-                
-                // Calculate new prices
                 calculatePrices();
             });
-
-            // Quantity row click handler
             $(document).on('click', '.quantity-row', function() {
                 selectedQuantity = $(this).data('quantity');
-                
-                // Update UI
                 $('.quantity-row').removeClass('selected').find('.quantity-badge').remove();
                 $(this).addClass('selected').find('td:first-child .font-medium').append('<span class="quantity-badge">Selected</span>');
                 
@@ -487,16 +438,12 @@
                     updateSummaryForQuantity(item, selectedQuantity);
                 }
             });
-
-            // Update initial summary
             function updateInitialSummary() {
                 const defaultItem = currentPricingTable.find(item => item.quantity === selectedQuantity);
                 if (defaultItem) {
                     updateSummaryForQuantity(defaultItem, selectedQuantity);
                 }
             }
-
-            // Update summary for specific quantity
             function updateSummaryForQuantity(item, quantity) {
                 $('#summary-quantity').text(quantity.toLocaleString());
                 $('#summary-price').text('$' + item.pack_price.toFixed(2));
@@ -513,8 +460,6 @@
                     $('#summary-savings').hide();
                 }
             }
-
-            // Calculate prices function
             function calculatePrices() {
                 console.log('Calculating with options:', selectedOptions);
                 
@@ -536,20 +481,15 @@
                             $('#summary-size').text(response.selected_options.size.name);
                             $('#summary-finish').text(response.selected_options.finish.name);
                             $('#summary-corners').text(response.selected_options.corners.name);
-                            
-                            // Update adjustment display
                             const adjustment = response.adjustment_per_card;
                             if (adjustment > 0) {
                                 $('#adjustment-per-card').text('+$' + adjustment.toFixed(2) + ' per card');
                             } else {
                                 $('#adjustment-per-card').text('+$0.00 per card');
                             }
-                            
-                            // Update pricing table
                             currentPricingTable = response.pricing_table;
                             updatePricingTable(response.pricing_table);
                             
-                            // Update summary with current quantity
                             const currentItem = response.pricing_table.find(item => item.quantity === selectedQuantity) || 
                                                response.pricing_table[0];
                             
@@ -566,7 +506,6 @@
                 });
             }
 
-            // Update pricing table function
             function updatePricingTable(pricingTable) {
                 const tableBody = $('#pricing-table-body');
                 tableBody.empty();
@@ -610,8 +549,6 @@
                     tableBody.append(row);
                 });
             }
-
-            // Initial calculation
             calculatePrices();
         });
     </script>

@@ -15,7 +15,6 @@ class CalculatorController extends Controller
         ->with(['subcategories.options', 'pricings'])
         ->firstOrFail();
 
-    // Get default options
     $defaults = [];
     foreach ($category->subcategories as $subcategory) {
         // First, try to get option marked as default
@@ -32,10 +31,6 @@ class CalculatorController extends Controller
         }
     }
 
-    // Debug: Check what defaults are set
-    // Log::info('Calculator defaults:', $defaults);
-
-    // Calculate initial pricing
     $initialPricing = $this->calculatePricing($category->id, $defaults);
     
 
@@ -65,30 +60,25 @@ class CalculatorController extends Controller
     {
         $category = Category::findOrFail($categoryId);
         
-        // Get selected options
         $size = Option::find($selectedOptions['size']);
         $finish = Option::find($selectedOptions['finish']);
         $corners = Option::find($selectedOptions['corners']);
         
-        // Calculate adjustment per card
         $adjustmentPerCard = 0;
         if ($size) $adjustmentPerCard += $size->price_adjustment;
         if ($finish) $adjustmentPerCard += $finish->price_adjustment;
         if ($corners) $adjustmentPerCard += $corners->price_adjustment;
         
-        // Get base pricing
         $basePricings = Pricing::where('category_id', $categoryId)
             ->where('is_active', true)
             ->orderBy('quantity')
             ->get();
 
-        // Calculate final pricing
         $pricingTable = [];
         foreach ($basePricings as $pricing) {
             $finalPricePerCard = $pricing->price_per_unit + $adjustmentPerCard;
             $finalPackPrice = round($finalPricePerCard * $pricing->quantity, 2);
             
-            // Calculate original price with adjustment
             $originalPrice = $pricing->original_price;
             if ($originalPrice) {
                 $basePricePerCard = $pricing->pack_price / $pricing->quantity;
